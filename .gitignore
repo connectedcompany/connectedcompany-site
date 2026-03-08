@@ -1,0 +1,24 @@
+.DS_Store
+
+# GitHub Pages deploy surface lives in:
+# - index.html
+# - assets/
+# - fonts/
+# - three.min.js
+# - CNAME
+
+# Exploration, prep, and brand working files
+/Archive/
+/BRAND.md
+/Gridplane Brand Guidelines.pdf
+/gridplane-hex-terrain-prototype.html
+/gridplane-key-visuals.html
+/gridplane-key-visuals.css
+/gridplane-focused-conversation.svg
+/gridplane-motif-01-structured-grid.svg
+/gridplane-motif-01-structured-grid-dark.svg
+/gridplane-motif-02-layered-planes.svg
+/gridplane-motif-02-layered-planes-dark.svg
+/gridplane-motif-03-mesh-network.svg
+/gridplane-motif-03-mesh-network-light.svg
+/three.module.min.js
