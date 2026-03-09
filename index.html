@@ -423,14 +423,13 @@
         position: absolute;
         inset: 0;
         opacity: 0;
-        transform: translateY(4px);
         pointer-events: none;
-        transition: opacity 900ms ease, transform 900ms ease;
+        transition: opacity 1400ms ease-in-out;
+        will-change: opacity;
       }
 
       .logo-grid.logo-slide.is-active {
-        opacity: 1;
-        transform: translateY(0);
+        opacity: 0.9;
         pointer-events: auto;
       }
 
@@ -444,7 +443,7 @@
         place-items: center;
         padding: 20px 18px;
         border: 1px solid var(--rule-soft);
-        background: rgba(255, 255, 255, 0.34);
+        background: rgba(255, 255, 255, 0.18);
         backdrop-filter: blur(8px);
         transition: background-color 180ms ease, border-color 180ms ease, transform 180ms ease;
       }
@@ -791,7 +790,7 @@
                 <img src="./assets/alcon.png" alt="Alcon logo" />
               </div>
               <div class="logo-card">
-                <img src="./assets/allfunds.png" alt="Allfunds logo" />
+                <img src="./assets/client-allfunds.svg" alt="Allfunds logo" />
               </div>
               <div class="logo-card">
                 <img src="./assets/mediar.png" alt="Mediar logo" />
