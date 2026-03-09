@@ -164,10 +164,11 @@
       }
 
       .search {
-        width: 220px;
+        width: auto;
         padding-bottom: 6px;
         border-bottom: 1px solid var(--rule);
         text-align: right;
+        white-space: nowrap;
       }
 
       .search strong,
@@ -407,10 +408,34 @@
         gap: 14px;
       }
 
+      .logo-carousel {
+        position: relative;
+        min-height: 112px;
+      }
+
       .logo-grid {
         display: grid;
-        grid-template-columns: repeat(5, minmax(0, 1fr));
         gap: 12px;
+        align-items: stretch;
+      }
+
+      .logo-grid.logo-slide {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transform: translateY(4px);
+        pointer-events: none;
+        transition: opacity 900ms ease, transform 900ms ease;
+      }
+
+      .logo-grid.logo-slide.is-active {
+        opacity: 1;
+        transform: translateY(0);
+        pointer-events: auto;
+      }
+
+      .logo-grid--5 {
+        grid-template-columns: repeat(5, minmax(0, 1fr));
       }
 
       .logo-card {
@@ -446,41 +471,30 @@
 
       .ecosystem-grid {
         display: grid;
-        grid-template-columns: repeat(9, minmax(0, 1fr));
-        gap: 10px;
+        grid-template-columns: repeat(auto-fit, minmax(72px, 1fr));
+        gap: 12px;
         align-items: center;
       }
 
       .ecosystem-chip {
-        min-height: 52px;
         display: grid;
         place-items: center;
-        padding: 10px 12px;
-        border: 1px solid var(--rule-soft);
-        background: rgba(255, 255, 255, 0.26);
-        backdrop-filter: blur(8px);
-        color: rgba(15, 15, 13, 0.72);
-        font-size: 11px;
-        line-height: 1.2;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
-        text-align: center;
+        width: clamp(58px, 7vw, 74px);
+        aspect-ratio: 1;
+        justify-self: center;
+        padding: 0;
+        border: 1px solid rgba(15, 15, 13, 0.06);
+        border-radius: 999px;
+        background: transparent;
       }
 
-      .ecosystem-chip.is-end-state {
-        background: rgba(255, 255, 255, 0.42);
-        border-color: var(--rule);
-        color: var(--ink);
-        font-weight: 600;
-      }
-
-      .ecosystem-link {
-        min-height: 52px;
-        display: grid;
-        place-items: center;
-        color: rgba(15, 15, 13, 0.34);
-        font-size: 16px;
-        line-height: 1;
+      .ecosystem-chip img {
+        display: block;
+        width: 28px;
+        max-width: 60%;
+        max-height: 60%;
+        height: auto;
+        object-fit: contain;
       }
 
       .approach-lede {
@@ -559,6 +573,42 @@
         color: var(--muted);
       }
 
+      .site-footer {
+        width: min(1240px, calc(100% - 36px));
+        margin: 0 auto;
+        padding: 0 0 36px;
+      }
+
+      .site-footer-inner {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px 28px;
+        padding-top: 16px;
+        border-top: 1px solid rgba(15, 15, 13, 0.12);
+        font-size: 11px;
+        line-height: 1.5;
+        color: var(--muted);
+        flex-wrap: wrap;
+      }
+
+      .site-footer-brand {
+        white-space: nowrap;
+      }
+
+      .site-footer-links {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+
+      .site-footer a {
+        color: inherit;
+        text-decoration: none;
+      }
+
       .meta-chip {
         padding-bottom: 8px;
         border-bottom: 1px solid var(--rule-soft);
@@ -589,9 +639,28 @@
         .why-grid,
         .approach-lede,
         .cta-block,
-        .logo-grid,
         .ecosystem-grid {
-          grid-template-columns: 1fr;
+          grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .logo-carousel {
+          min-height: 0;
+          display: grid;
+          gap: 12px;
+        }
+
+        .logo-grid.logo-slide,
+        .logo-grid.logo-slide.is-active {
+          position: static;
+          width: auto;
+          margin: 0;
+          opacity: 1;
+          transform: none;
+          pointer-events: auto;
+        }
+
+        .logo-grid--5 {
+          grid-template-columns: repeat(4, minmax(0, 1fr));
         }
 
         .search-cluster {
@@ -605,6 +674,11 @@
         .cta-visual {
           justify-self: start;
         }
+
+        .site-footer-inner,
+        .site-footer-links {
+          justify-content: flex-start;
+        }
       }
 
       @media (prefers-reduced-motion: reduce) {
@@ -612,6 +686,23 @@
           background:
             linear-gradient(180deg, rgba(255, 255, 255, 0.24), rgba(255, 255, 255, 0) 18%),
             linear-gradient(180deg, rgba(255, 255, 255, 0) 82%, rgba(255, 255, 255, 0.18));
+        }
+
+        .logo-carousel {
+          min-height: 0;
+          display: grid;
+          gap: 12px;
+        }
+
+        .logo-grid.logo-slide,
+        .logo-grid.logo-slide.is-active {
+          position: static;
+          width: auto;
+          margin: 0;
+          opacity: 1;
+          transform: none;
+          pointer-events: auto;
+          transition: none;
         }
       }
     </style>
@@ -629,12 +720,13 @@
           </div>
           <nav class="site-nav" aria-label="Primary">
             <a href="#examples">Our work</a>
+            <a href="#careers">Careers</a>
             <a href="#contact">Contact</a>
           </nav>
         </div>
 
         <div class="search-cluster">
-          <div class="search"><strong>Small teams. High impact.</strong></div>
+          <div class="search"><strong>Small teams. Forward Deployed. High impact.</strong></div>
           <a class="cta-link" href="#contact"><strong>Start A Conversation</strong></a>
         </div>
       </header>
@@ -670,33 +762,52 @@
             <div class="section-kicker">Clients</div>
             <h2 id="selected-experience-title">Trusted by organisations across the world.</h2>
           </div>
-          <div class="logo-grid" aria-label="Placeholder logos">
-            <div class="logo-card">
-              <img src="./assets/mg-investments.png" alt="M and G Investments logo placeholder" />
+          <div class="logo-carousel" aria-label="Selected client logos">
+            <div class="logo-grid logo-grid--5 logo-slide is-active" data-logo-slide aria-hidden="false">
+              <div class="logo-card">
+                <img src="./assets/client-astrazeneca.svg" alt="AstraZeneca logo" />
+              </div>
+              <div class="logo-card">
+                <img src="./assets/client-mg.svg" alt="M and G Asset Management logo" />
+              </div>
+              <div class="logo-card">
+                <img src="./assets/client-prudential.svg" alt="Prudential logo" />
+              </div>
+              <div class="logo-card">
+                <img src="./assets/client-edf.svg" alt="EDF logo" />
+              </div>
+              <div class="logo-card">
+                <img src="./assets/client-fca.svg" alt="Financial Conduct Authority logo" />
+              </div>
             </div>
-            <div class="logo-card">
-              <img src="./assets/lloyds-bank.png" alt="Lloyds Bank logo placeholder" />
-            </div>
-            <div class="logo-card">
-              <img src="./assets/mediar.png" alt="Mediar logo placeholder" />
-            </div>
-            <div class="logo-card">
-              <img src="./assets/allfunds.png" alt="Allfunds logo placeholder" />
-            </div>
-            <div class="logo-card">
-              <img src="./assets/alcon.png" alt="Alcon logo placeholder" />
+            <div class="logo-grid logo-grid--5 logo-slide" data-logo-slide aria-hidden="true">
+              <div class="logo-card">
+                <img src="./assets/client-abbvie.svg" alt="AbbVie logo" />
+              </div>
+              <div class="logo-card">
+                <img src="./assets/client-lloyds.svg" alt="Lloyds Bank logo" />
+              </div>
+              <div class="logo-card">
+                <img src="./assets/alcon.png" alt="Alcon logo" />
+              </div>
+              <div class="logo-card">
+                <img src="./assets/allfunds.png" alt="Allfunds logo" />
+              </div>
+              <div class="logo-card">
+                <img src="./assets/mediar.png" alt="Mediar logo" />
+              </div>
             </div>
           </div>
         </section>
 
         <section class="section" aria-labelledby="ai-positioning-title">
           <div class="section-head">
-            <div class="section-kicker">AI positioning</div>
-            <h2 id="ai-positioning-title">Independent advice across a fragmented AI ecosystem.</h2>
+            <div class="section-kicker">Practical AI</div>
+            <h2 id="ai-positioning-title">Forward-deployed teams build AI for your business.</h2>
             <p class="section-intro">
-              Gridplane is an AI play in the sense that we help organisations make sound decisions about where AI fits, where it
-              does not, and what architecture, controls, and operating changes are required to make it useful. Our role is not to
-              push a preferred platform. It is to bring clarity across a crowded ecosystem and help clients move with confidence.
+              Gridplane helps organisations make AI useful in practice. We build practical solutions to real problems, improve the
+              systems and workflows around them, and make sure the technology fits how the business actually operates. We are not
+              here to push a preferred platform. We are here to build what works and help teams move forward with confidence.
             </p>
           </div>
           <div class="placeholder-grid">
@@ -726,17 +837,21 @@
             </article>
           </div>
           <div class="ecosystem-strip" aria-label="Example ecosystems">
-            <div class="ecosystem-label micro-label">Ecosystems we advise across</div>
+            <div class="ecosystem-label micro-label">We build across all ecosystems</div>
             <div class="ecosystem-grid">
-              <div class="ecosystem-chip">AWS</div>
-              <div class="ecosystem-chip">Azure</div>
-              <div class="ecosystem-chip">Google Cloud</div>
-              <div class="ecosystem-chip">Databricks</div>
-              <div class="ecosystem-chip">Snowflake</div>
-              <div class="ecosystem-chip">OpenAI</div>
-              <div class="ecosystem-chip">Anthropic</div>
-              <div class="ecosystem-link" aria-hidden="true">→</div>
-              <div class="ecosystem-chip is-end-state">Clearer operating shape</div>
+              <div class="ecosystem-chip"><img src="./assets/ecosystem-aws-icon.png" alt="AWS logo" /></div>
+              <div class="ecosystem-chip"><img src="./assets/ecosystem-azure-icon.png" alt="Azure logo" /></div>
+              <div class="ecosystem-chip"><img src="./assets/ecosystem-google-cloud-icon.png" alt="Google Cloud logo" /></div>
+              <div class="ecosystem-chip"><img src="./assets/ecosystem-databricks-icon.png" alt="Databricks logo" /></div>
+              <div class="ecosystem-chip"><img src="./assets/ecosystem-snowflake-icon.png" alt="Snowflake logo" /></div>
+              <div class="ecosystem-chip"><img src="./assets/ecosystem-nvidia-icon.svg" alt="NVIDIA logo" /></div>
+              <div class="ecosystem-chip"><img src="./assets/ecosystem-openai-icon.png" alt="OpenAI logo" /></div>
+              <div class="ecosystem-chip"><img src="./assets/ecosystem-anthropic-icon.png" alt="Anthropic logo" /></div>
+              <div class="ecosystem-chip"><img src="./assets/ecosystem-mistral-icon.png" alt="Mistral logo" /></div>
+              <div class="ecosystem-chip"><img src="./assets/ecosystem-meta-icon.svg" alt="Meta logo" /></div>
+              <div class="ecosystem-chip"><img src="./assets/ecosystem-qwen-icon.svg" alt="Qwen logo" /></div>
+              <div class="ecosystem-chip"><img src="./assets/ecosystem-deepseek-icon.svg" alt="DeepSeek logo" /></div>
+              <div class="ecosystem-chip"><img src="./assets/ecosystem-hugging-face-icon.svg" alt="Hugging Face logo" /></div>
             </div>
           </div>
         </section>
@@ -744,10 +859,10 @@
         <section id="examples" class="section">
           <div class="section-head">
             <div class="section-kicker">What we do</div>
-            <h2>Current themes and perspectives.</h2>
+            <h2>Our work in practice.</h2>
             <p class="section-intro">
               Every organisation has its own operating landscape, with strengths worth preserving and friction points that need
-              targeted intervention. These themes reflect how Gridplane thinks about shaping the right response for each specific
+              targeted intervention. These case studies reflect how Gridplane thinks about shaping the right response for each specific
               environment.
             </p>
           </div>
@@ -809,6 +924,18 @@
         </section>
       </div>
 
+      <footer class="site-footer">
+        <div class="site-footer-inner">
+          <div class="site-footer-brand">Gridplane</div>
+          <nav class="site-footer-links" aria-label="Legal">
+            <a href="/privacy">Privacy</a>
+            <a href="/cookies">Cookie Policy</a>
+            <a href="/terms">Terms</a>
+            <a href="/modern-slavery">Modern Slavery</a>
+          </nav>
+        </div>
+      </footer>
+
       <div id="fallback" class="fallback" role="status">
         WebGL did not initialize. The HTML structure still loads, but the animated terrain needs a browser with WebGL enabled.
       </div>
@@ -816,6 +943,28 @@
 
     <script src="./three.min.js"></script>
     <script>
+      const bootClientCarousel = () => {
+        const slides = Array.from(document.querySelectorAll("[data-logo-slide]"));
+        if (slides.length < 2 || window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+          return;
+        }
+
+        let activeIndex = slides.findIndex((slide) => slide.classList.contains("is-active"));
+        if (activeIndex < 0) {
+          activeIndex = 0;
+          slides[0].classList.add("is-active");
+          slides[0].setAttribute("aria-hidden", "false");
+        }
+
+        window.setInterval(() => {
+          slides[activeIndex].classList.remove("is-active");
+          slides[activeIndex].setAttribute("aria-hidden", "true");
+          activeIndex = (activeIndex + 1) % slides.length;
+          slides[activeIndex].classList.add("is-active");
+          slides[activeIndex].setAttribute("aria-hidden", "false");
+        }, 7600);
+      };
+
       const bootTerrainExperience = () => {
         const fallback = document.getElementById("fallback");
         const canvas = document.getElementById("terrain");
@@ -1313,6 +1462,7 @@
       };
 
       if (document.readyState === "complete") {
+        bootClientCarousel();
         if ("requestIdleCallback" in window) {
           window.requestIdleCallback(bootTerrainExperience, { timeout: 1200 });
         } else {
@@ -1320,6 +1470,7 @@
         }
       } else {
         window.addEventListener("load", () => {
+          bootClientCarousel();
           if ("requestIdleCallback" in window) {
             window.requestIdleCallback(bootTerrainExperience, { timeout: 1200 });
           } else {
