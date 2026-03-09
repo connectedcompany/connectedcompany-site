@@ -814,20 +814,19 @@
       </div>
     </main>
 
-    <script type="module">
-      const bootTerrainExperience = async () => {
+    <script src="./three.min.js"></script>
+    <script>
+      const bootTerrainExperience = () => {
         const fallback = document.getElementById("fallback");
         const canvas = document.getElementById("terrain");
         const ctaCanvas = document.getElementById("cta-terrain");
-        let THREE;
 
-        try {
-          THREE = await import("./three.module.min.js");
-        } catch (error) {
-          console.error(error);
+        if (!window.THREE) {
           fallback.classList.add("is-visible");
           return;
         }
+
+        const THREE = window.THREE;
 
         try {
           const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
