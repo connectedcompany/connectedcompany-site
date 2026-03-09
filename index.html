@@ -631,15 +631,24 @@
       }
 
       @media (max-width: 980px) {
-        .hero-grid,
         .section-grid-3,
-        .services-grid,
         .approach-grid,
         .why-grid,
+        .placeholder-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
         .approach-lede,
-        .cta-block,
+        .cta-block {
+          grid-template-columns: minmax(0, 1fr);
+        }
+
         .ecosystem-grid {
           grid-template-columns: repeat(4, minmax(0, 1fr));
+        }
+
+        .content-card {
+          min-height: 0;
         }
 
         .logo-carousel {
@@ -671,6 +680,7 @@
         }
 
         .cta-visual {
+          width: min(100%, 320px);
           justify-self: start;
         }
 
