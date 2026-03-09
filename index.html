@@ -4,10 +4,15 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Gridplane</title>
+    <link rel="icon" href="./favicon.ico" sizes="any" />
+    <link rel="icon" type="image/png" href="./assets/gridplane_logo.png" />
+    <link rel="apple-touch-icon" href="./assets/gridplane_logo.png" />
     <style>
       @font-face {
         font-family: "Montserrat";
-        src: url("./fonts/Montserrat-Regular.ttf") format("truetype");
+        src:
+          url("./fonts/Montserrat-Regular.woff2") format("woff2"),
+          url("./fonts/Montserrat-Regular.ttf") format("truetype");
         font-weight: 400;
         font-style: normal;
         font-display: swap;
@@ -15,7 +20,9 @@
 
       @font-face {
         font-family: "Montserrat";
-        src: url("./fonts/Montserrat-SemiBold.ttf") format("truetype");
+        src:
+          url("./fonts/Montserrat-SemiBold.woff2") format("woff2"),
+          url("./fonts/Montserrat-SemiBold.ttf") format("truetype");
         font-weight: 600;
         font-style: normal;
         font-display: swap;
@@ -23,7 +30,9 @@
 
       @font-face {
         font-family: "Montserrat";
-        src: url("./fonts/Montserrat-Bold.ttf") format("truetype");
+        src:
+          url("./fonts/Montserrat-Bold.woff2") format("woff2"),
+          url("./fonts/Montserrat-Bold.ttf") format("truetype");
         font-weight: 700;
         font-style: normal;
         font-display: swap;
@@ -805,14 +814,17 @@
       </div>
     </main>
 
-    <script src="./three.min.js"></script>
-    <script>
-      (() => {
+    <script type="module">
+      const bootTerrainExperience = async () => {
         const fallback = document.getElementById("fallback");
         const canvas = document.getElementById("terrain");
         const ctaCanvas = document.getElementById("cta-terrain");
+        let THREE;
 
-        if (!window.THREE) {
+        try {
+          THREE = await import("./three.module.min.js");
+        } catch (error) {
+          console.error(error);
           fallback.classList.add("is-visible");
           return;
         }
@@ -845,7 +857,7 @@
               uLineColor: { value: new THREE.Color(overrides.lineColor ?? "#111111") },
               uAccentColor: { value: new THREE.Color(overrides.accentColor ?? "#b81b27") },
               uFogColor: { value: new THREE.Color(overrides.fogColor ?? "#efeee8") },
-              uAccentRegion: { value: new THREE.Vector4(...(overrides.accentRegion ?? [0.58, 0.78, 0.46, 0.72])) }
+              uAccentRegion: { value: new THREE.Vector4(...(overrides.accentRegion ?? [0.58, 0.78, 0.64, 0.9])) }
             };
           }
 
@@ -993,36 +1005,115 @@
               float horizonFog = smoothstep(16.0, 60.0, abs(vWorldPos.z - cameraPosition.z));
               float fog = clamp(max(distanceFog, horizonFog * 0.68), 0.0, 1.0);
 
-              float scanWarp = (noise2(vPatternPos.xz * 0.08 + vec2(uTime * 0.03, -uTime * 0.04)) - 0.5) * 3.0;
-              vec2 scanOrigin = vec2(cameraPosition.x * 0.35, cameraPosition.z - 34.0);
-              float scanRadius = mod(uTime * 7.5, 96.0);
-              float scanDistance = abs(distance(vWorldPos.xz, scanOrigin) + scanWarp - scanRadius);
+              float scanWarp = (noise2(vPatternPos.xz * 0.08 + vec2(uTime * 0.03, -uTime * 0.04)) - 0.5) * 2.2;
+              vec2 scanOrigin = vec2(0.0, -12.0);
+              float introFadeDuration = 1.4;
+              float introHoldDuration = 3.0;
+              float introTotal = introFadeDuration + introHoldDuration;
+              float persistentGrid = smoothstep(0.0, introFadeDuration, min(uTime, introFadeDuration));
+              float cycleEnabled = step(introTotal, uTime);
+              float prePulseDuration = 1.6;
+              float expandDuration = 5.8;
+              float holdDuration = 2.7;
+              float fadeDuration = 2.3;
+              float pulseCycle = 13.8;
+              float pulseFreezeAt = prePulseDuration + expandDuration + holdDuration;
+              float pulsePhase = min(max(0.0, uTime - introTotal) + prePulseDuration, pulseFreezeAt);
+              float activePulsePhase = max(0.0, pulsePhase - prePulseDuration);
+              float expandProgress = smoothstep(0.0, expandDuration, min(activePulsePhase, expandDuration));
+              float pulseRadius = mix(0.0, 88.0, expandProgress);
+              float pulseDistance = distance(vWorldPos.xz, scanOrigin);
+              float scanDistance = abs(pulseDistance + scanWarp - pulseRadius);
 
-              float scanHalo = 1.0 - smoothstep(0.6, 8.0, scanDistance);
-              float scanCore = 1.0 - smoothstep(0.0, 1.6, scanDistance);
-              float reveal = max(0.025, scanHalo * 0.38 + scanCore * 0.95);
+              float activeDuration = expandDuration + holdDuration + fadeDuration;
+              float pulsePresence = 0.0;
+              float fadeProgress = 0.0;
+              if (activePulsePhase < expandDuration + holdDuration && pulsePhase >= prePulseDuration) {
+                pulsePresence = 1.0;
+              } else if (activePulsePhase < activeDuration && pulsePhase >= prePulseDuration) {
+                pulsePresence = 1.0;
+                fadeProgress = smoothstep(0.0, 1.0, (activePulsePhase - expandDuration - holdDuration) / fadeDuration);
+              }
+              pulsePresence *= cycleEnabled;
+              float fadeMute = mix(1.0, 0.58, fadeProgress);
+              float prePulseStrength = smoothstep(0.0, prePulseDuration * 0.28, pulsePhase) * (1.0 - smoothstep(prePulseDuration * 0.72, prePulseDuration, pulsePhase)) * cycleEnabled;
 
-              base = mix(base * 0.95, base * 1.015, scanHalo * (1.0 - fog * 0.45));
-              base = mix(base, base * 1.05, scanCore * (1.0 - fog * 0.3));
+              float scanHalo = (1.0 - smoothstep(0.8, 9.6, scanDistance)) * pulsePresence;
+              float scanCore = (1.0 - smoothstep(0.0, 1.9, scanDistance)) * pulsePresence;
+              float revealedField = (1.0 - smoothstep(-4.0, 2.8, pulseDistance + scanWarp * 0.55 - pulseRadius)) * pulsePresence;
+              float tailProgress = smoothstep(prePulseDuration + activeDuration, pulseCycle, pulsePhase);
+              float tailPresence = step(prePulseDuration + activeDuration, pulsePhase) * (1.0 - tailProgress);
+              float tailField = (1.0 - smoothstep(-5.0, 5.8, pulseDistance + scanWarp * 0.55 - 88.0)) * tailPresence;
+              float settledReveal = max(revealedField * fadeMute, tailField * mix(0.28, 0.0, tailProgress));
+              float reveal = max(0.035, settledReveal * 0.42 + scanHalo * 0.18 * fadeMute + scanCore * 0.76 * fadeMute);
+
+              base = mix(base * 0.95, base * 1.01, (settledReveal * 0.24 + scanHalo * 0.26 * fadeMute) * (1.0 - fog * 0.45));
+              base = mix(base, base * 1.05, (settledReveal * 0.22 + scanCore * 0.72 * fadeMute) * (1.0 - fog * 0.3));
 
               vec2 screenUv = gl_FragCoord.xy / uResolution.xy;
+              float prePulseSweepY = mix(0.18, 0.88, smoothstep(0.0, prePulseDuration, min(pulsePhase, prePulseDuration)));
+              float prePulseSweep = (1.0 - smoothstep(0.0, 0.14, abs(screenUv.y - prePulseSweepY))) * prePulseStrength;
+              float prePulseGrid = clamp(prePulseStrength * 0.22 + prePulseSweep * 0.72, 0.0, 1.0);
+              float gridPrelude = clamp(persistentGrid + prePulseGrid * 0.35, 0.0, 1.0);
               float accentRegionX = smoothstep(uAccentRegion.x, uAccentRegion.y, screenUv.x);
-              float accentRegionY = 1.0 - smoothstep(uAccentRegion.z, uAccentRegion.w, screenUv.y);
-              float accentRegion = accentRegionX * accentRegionY;
+              float accentRegionY = smoothstep(uAccentRegion.z, uAccentRegion.w, screenUv.y);
+              float staticAccentRegion = accentRegionX * accentRegionY;
+              float pulseAccentWindow = smoothstep(0.18, 0.34, screenUv.y) * (1.0 - smoothstep(0.84, 0.97, screenUv.y));
+              float pulseRevealField = clamp(settledReveal * 1.1 + scanHalo * 0.12 * fadeMute, 0.0, 1.0);
+              float pulseAccentRegion = pulseRevealField * pulseAccentWindow;
+              float accentRegion = max(staticAccentRegion, pulseAccentRegion);
+              float hexInterior = smoothstep(uLineWidth + aa * 3.0, uLineWidth + aa * 12.0, edgeDistance);
               float accentSeed = hash(cell + vec2(19.3, 7.1));
-              float accentCells = step(0.76, accentSeed);
-              float accentReveal = accentRegion * accentCells * clamp(scanCore * 1.65 + scanHalo * 0.9 + 0.22, 0.0, 1.0);
+              float staticAccentCells = staticAccentRegion * step(0.76, accentSeed);
+              float pulseAccentCells = pulseAccentRegion * step(0.58, accentSeed);
+              float accentCells = max(staticAccentCells, pulseAccentCells);
+              float accentReveal = accentRegion * accentCells * clamp(settledReveal * 0.92 + scanCore * 1.45 * fadeMute + scanHalo * 0.62 * fadeMute + 0.18, 0.0, 1.0);
               float hotSeed = hash(cell + vec2(41.7, 3.4));
-              float hotCell = accentRegion * step(0.989, hotSeed);
-              float hotReveal = hotCell * clamp(scanCore * 1.9 + scanHalo * 1.1 + 0.3, 0.0, 1.0);
+              float staticHotCell = staticAccentRegion * step(0.9945, hotSeed);
+              float pulseHotCell = pulseAccentRegion * step(0.95, hotSeed);
+              float hotCell = max(staticHotCell, pulseHotCell);
+              float hotspotNeighborCount = 0.0;
+              hotspotNeighborCount += step(0.9, hash(cell + vec2(1.0, 0.0) + vec2(41.7, 3.4)));
+              hotspotNeighborCount += step(0.9, hash(cell + vec2(0.0, 1.0) + vec2(41.7, 3.4)));
+              hotspotNeighborCount += step(0.9, hash(cell + vec2(-1.0, 1.0) + vec2(41.7, 3.4)));
+              hotspotNeighborCount += step(0.9, hash(cell + vec2(-1.0, 0.0) + vec2(41.7, 3.4)));
+              hotspotNeighborCount += step(0.9, hash(cell + vec2(0.0, -1.0) + vec2(41.7, 3.4)));
+              hotspotNeighborCount += step(0.9, hash(cell + vec2(1.0, -1.0) + vec2(41.7, 3.4)));
+              float workflowSeed = hash(cell + vec2(7.9, 23.4));
+              float workflowCells = accentRegion * (1.0 - accentCells) * step(0.72, hotspotNeighborCount * 0.42 + workflowSeed * 0.68);
+              float workflowNeighborCount = 0.0;
+              workflowNeighborCount += step(0.72, hash(cell + vec2(1.0, 0.0) + vec2(7.9, 23.4)));
+              workflowNeighborCount += step(0.72, hash(cell + vec2(0.0, 1.0) + vec2(7.9, 23.4)));
+              workflowNeighborCount += step(0.72, hash(cell + vec2(-1.0, 1.0) + vec2(7.9, 23.4)));
+              workflowNeighborCount += step(0.72, hash(cell + vec2(-1.0, 0.0) + vec2(7.9, 23.4)));
+              workflowNeighborCount += step(0.72, hash(cell + vec2(0.0, -1.0) + vec2(7.9, 23.4)));
+              workflowNeighborCount += step(0.72, hash(cell + vec2(1.0, -1.0) + vec2(7.9, 23.4)));
+              float lightWorkflowSeed = hash(cell + vec2(13.2, 31.6));
+              float lightWorkflowAdjacency = hotspotNeighborCount * 0.38 + workflowNeighborCount * 0.24;
+              float lightWorkflowCells = accentRegion * (1.0 - hotCell) * (1.0 - workflowCells) * step(0.5, lightWorkflowAdjacency + lightWorkflowSeed * 0.16);
+              float workflowReveal = workflowCells * clamp(settledReveal * 0.92 + scanHalo * 0.18 * fadeMute + 0.08, 0.0, 1.0);
+              float lightWorkflowReveal = lightWorkflowCells * clamp(settledReveal * 0.86 + scanHalo * 0.14 * fadeMute + 0.08, 0.0, 1.0);
+              float hotReveal = hotCell * clamp(settledReveal * 0.96 + scanCore * 1.42 * fadeMute + scanHalo * 0.76 * fadeMute + 0.24, 0.0, 1.0);
+              float fillThreshold = 1.0 - expandProgress * 0.82;
+              float topFillRoll = 1.0 - smoothstep(-0.04, 0.1, screenUv.y - fillThreshold);
+              float pulseFillRoll = pulseRevealField * pulseAccentWindow;
+              float fillRoll = max(topFillRoll, pulseFillRoll);
+              float workflowFill = workflowReveal * hexInterior * fillRoll;
+              float lightWorkflowFill = lightWorkflowReveal * hexInterior * max(fillRoll * 0.86, settledReveal * 0.68);
+              float hotFill = hotCell * hexInterior * fillRoll * clamp(settledReveal * 1.08 + scanCore * 0.18 * fadeMute + 0.08, 0.0, 1.0);
 
+              vec3 prePulseTint = mix(base * 0.94, uLineColor, 0.56);
               vec3 scanTint = mix(base * 0.88, uLineColor, 0.78);
-              vec3 color = mix(base, scanTint, hexLine * reveal * (1.0 - fog * 0.15));
-              color = mix(color, uAccentColor, hexLine * accentReveal * (1.0 - fog * 0.02));
-              color += uAccentColor * hexLine * accentRegion * accentCells * 0.11 * (1.0 - fog * 0.25);
+              vec3 color = mix(base, prePulseTint, hexLine * gridPrelude * (1.0 - fog * 0.22));
+              color = mix(color, scanTint, hexLine * (scanHalo * 0.16 + scanCore * 0.12) * fadeMute * (1.0 - fog * 0.15));
+              vec3 workflowColor = mix(base * 0.8, uLineColor, 0.45);
+              vec3 lightWorkflowColor = mix(base, workflowColor, 0.5);
+              color = mix(color, lightWorkflowColor, lightWorkflowFill * (1.0 - fog * 0.06));
+              color = mix(color, workflowColor, workflowFill * (1.0 - fog * 0.08));
+              color = mix(color, uAccentColor * 0.92, hotFill * (1.0 - fog * 0.04));
               color = mix(color, uAccentColor * 1.35, hexLine * hotReveal * (1.0 - fog * 0.02));
-              color += uAccentColor * hexLine * hotCell * 0.24 * (1.0 - fog * 0.2);
-              color += vec3(0.02) * scanHalo * (1.0 - fog) * (0.45 + heightMix * 0.35);
+              color += uAccentColor * hexLine * hotCell * 0.24 * fadeMute * (1.0 - fog * 0.2);
+              color += vec3(0.02) * (scanHalo * fadeMute + settledReveal * 0.18) * (1.0 - fog) * (0.45 + heightMix * 0.35);
               color = mix(color, uFogColor, fog);
 
               gl_FragColor = vec4(color, 1.0);
@@ -1198,7 +1289,7 @@
             const motionScale = prefersReducedMotion ? 0.18 : 1.0;
 
             uniforms.uTime.value = time;
-            uniforms.uScroll.value = time * 3.0 * motionScale;
+            uniforms.uScroll.value = time * 0.6 * motionScale;
 
             camera.position.x = Math.sin(time * 0.056) * 6.8;
             camera.position.y = 13.5 + Math.sin(time * 0.044) * 1.1 * motionScale;
@@ -1220,7 +1311,23 @@
           console.error(error);
           fallback.classList.add("is-visible");
         }
-      })();
+      };
+
+      if (document.readyState === "complete") {
+        if ("requestIdleCallback" in window) {
+          window.requestIdleCallback(bootTerrainExperience, { timeout: 1200 });
+        } else {
+          window.setTimeout(bootTerrainExperience, 180);
+        }
+      } else {
+        window.addEventListener("load", () => {
+          if ("requestIdleCallback" in window) {
+            window.requestIdleCallback(bootTerrainExperience, { timeout: 1200 });
+          } else {
+            window.setTimeout(bootTerrainExperience, 180);
+          }
+        }, { once: true });
+      }
     </script>
   </body>
 </html>
