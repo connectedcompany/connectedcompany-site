@@ -810,7 +810,7 @@
         </div>
 
         <div class="search-cluster">
-          <div class="search"><strong>Small teams. Embedded. High impact.</strong></div>
+          <div class="search"><strong>Small teams. High impact.</strong></div>
           <a class="cta-link" href="#contact"><strong>Start A Conversation</strong></a>
         </div>
       </header>
@@ -1085,8 +1085,8 @@
               uHexSize: { value: overrides.hexSize ?? 1.1 },
               uLineWidth: { value: overrides.lineWidth ?? 0.0125 },
               uResolution: { value: new THREE.Vector2(width, height) },
-              uBaseColorA: { value: new THREE.Color(overrides.baseColorA ?? "#f1f0ea") },
-              uBaseColorB: { value: new THREE.Color(overrides.baseColorB ?? "#d8d4c9") },
+              uBaseColorA: { value: new THREE.Color(overrides.baseColorA ?? "#d9d8d3") },
+              uBaseColorB: { value: new THREE.Color(overrides.baseColorB ?? "#c2bfb5") },
               uLineColor: { value: new THREE.Color(overrides.lineColor ?? "#111111") },
               uAccentColor: { value: new THREE.Color(overrides.accentColor ?? "#b81b27") },
               uFogColor: { value: new THREE.Color(overrides.fogColor ?? "#efeee8") },
@@ -1334,11 +1334,13 @@
               float workflowFill = workflowReveal * hexInterior * fillRoll;
               float lightWorkflowFill = lightWorkflowReveal * hexInterior * max(fillRoll * 0.86, settledReveal * 0.68);
               float hotFill = hotCell * hexInterior * fillRoll * clamp(settledReveal * 1.08 + scanCore * 0.18 * fadeMute + 0.08, 0.0, 1.0);
+              float filledCellPresence = clamp(max(max(workflowFill, lightWorkflowFill), hotFill), 0.0, 1.0);
+              float emptyBorderShade = mix(0.2, 1.0, filledCellPresence);
 
               vec3 prePulseTint = mix(base * 0.94, uLineColor, 0.56);
               vec3 scanTint = mix(base * 0.88, uLineColor, 0.78);
-              vec3 color = mix(base, prePulseTint, hexLine * gridPrelude * (1.0 - fog * 0.22));
-              color = mix(color, scanTint, hexLine * (scanHalo * 0.16 + scanCore * 0.12) * fadeMute * (1.0 - fog * 0.15));
+              vec3 color = mix(base, prePulseTint, hexLine * gridPrelude * emptyBorderShade * (1.0 - fog * 0.22));
+              color = mix(color, scanTint, hexLine * (scanHalo * 0.16 + scanCore * 0.12) * emptyBorderShade * fadeMute * (1.0 - fog * 0.15));
               vec3 workflowColor = mix(base * 0.8, uLineColor, 0.45);
               vec3 lightWorkflowColor = mix(base, workflowColor, 0.5);
               color = mix(color, lightWorkflowColor, lightWorkflowFill * (1.0 - fog * 0.06));
