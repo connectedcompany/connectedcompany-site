@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cookie Policy | ConnectedCompany</title>
+    <link rel="icon" href="../favicon.ico" sizes="any" />
+    <link rel="icon" type="image/svg+xml" href="../assets/connectedcompany_logo.svg" />
+    <link rel="icon" type="image/png" href="../assets/connectedcompany_logo.png" sizes="any" />
+    <link rel="apple-touch-icon" href="../assets/connectedcompany_logo.svg" />
+    <style>
+      @font-face {
+        font-family: "Montserrat";
+        src:
+          url("../fonts/Montserrat-Regular.woff2") format("woff2"),
+          url("../fonts/Montserrat-Regular.ttf") format("truetype");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "Montserrat";
+        src:
+          url("../fonts/Montserrat-SemiBold.woff2") format("woff2"),
+          url("../fonts/Montserrat-SemiBold.ttf") format("truetype");
+        font-weight: 600;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "Montserrat";
+        src:
+          url("../fonts/Montserrat-Bold.woff2") format("woff2"),
+          url("../fonts/Montserrat-Bold.ttf") format("truetype");
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      :root {
+        color-scheme: light;
+        --bg: #efeee8;
+        --bg-strong: #e8e6de;
+        --panel: rgba(255, 255, 255, 0.4);
+        --panel-strong: rgba(255, 255, 255, 0.58);
+        --ink: #0f0f0d;
+        --muted: rgba(15, 15, 13, 0.62);
+        --rule: rgba(15, 15, 13, 0.18);
+        --rule-strong: rgba(15, 15, 13, 0.3);
+        --link: #0f0f0d;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+      }
+
+      body {
+        font-family: "Montserrat", Arial, sans-serif;
+        background:
+          radial-gradient(circle at top left, rgba(255, 255, 255, 0.75), transparent 36%),
+          linear-gradient(180deg, var(--bg) 0%, var(--bg-strong) 100%);
+        color: var(--ink);
+      }
+
+      a {
+        color: var(--link);
+      }
+
+      .site {
+        width: min(1120px, calc(100vw - 32px));
+        margin: 0 auto;
+        padding: 28px 0 56px;
+      }
+
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        padding: 8px 0 24px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+
+      .brand img {
+        width: 34px;
+        height: 34px;
+        object-fit: contain;
+      }
+
+      .top-links {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+
+      .top-links a,
+      .footer-links a {
+        text-decoration: none;
+        color: var(--muted);
+      }
+
+      .top-links a:hover,
+      .footer-links a:hover,
+      .brand:hover {
+        color: var(--ink);
+      }
+
+      .hero,
+      .content {
+        border: 1px solid var(--rule);
+        background: var(--panel);
+        backdrop-filter: blur(10px);
+      }
+
+      .hero {
+        padding: 48px;
+        border-radius: 28px 28px 0 0;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 16px;
+        color: var(--muted);
+        font-size: 0.82rem;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2.4rem, 6vw, 4.8rem);
+        line-height: 0.96;
+        letter-spacing: -0.05em;
+        max-width: 14ch;
+      }
+
+      .lede {
+        max-width: 700px;
+        margin: 18px 0 0;
+        color: var(--muted);
+        font-size: 1.02rem;
+        line-height: 1.7;
+      }
+
+      .content {
+        border-top: 0;
+        border-radius: 0 0 28px 28px;
+        padding: 0 48px 32px;
+      }
+
+      .meta {
+        padding: 28px 0 20px;
+        border-bottom: 1px solid var(--rule);
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .policy-section {
+        padding: 28px 0;
+        border-bottom: 1px solid var(--rule);
+        display: grid;
+        grid-template-columns: minmax(180px, 220px) 1fr;
+        gap: 28px;
+      }
+
+      .policy-section:last-of-type {
+        border-bottom: 0;
+      }
+
+      .policy-section h2 {
+        margin: 0;
+        font-size: 0.92rem;
+        line-height: 1.4;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+      }
+
+      .policy-section p {
+        margin: 0 0 14px;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      .policy-section p:last-child {
+        margin-bottom: 0;
+      }
+
+      .policy-section ul {
+        margin: 0 0 14px;
+        padding-left: 1.2em;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      .footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        padding: 26px 0 0;
+        color: var(--muted);
+        font-size: 0.94rem;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+
+      @media (max-width: 760px) {
+        .site {
+          width: min(100vw - 20px, 1120px);
+          padding-top: 18px;
+        }
+
+        .topbar,
+        .footer,
+        .policy-section {
+          grid-template-columns: 1fr;
+          display: grid;
+        }
+
+        .hero,
+        .content {
+          padding-left: 22px;
+          padding-right: 22px;
+        }
+
+        .hero {
+          padding-top: 34px;
+          padding-bottom: 34px;
+        }
+
+        .content {
+          padding-bottom: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="site">
+      <header class="topbar">
+        <a class="brand" href="/">
+          <img src="../assets/connectedcompany_logo.svg" alt="ConnectedCompany logo" />
+          <span>ConnectedCompany</span>
+        </a>
+        <nav class="top-links" aria-label="Secondary">
+          <a href="/">Home</a>
+          <a href="/privacy">Privacy</a>
+          <a href="/cookies" aria-current="page">Cookie Policy</a>
+          <a href="mailto:hello@connectedcompany.io">hello@connectedcompany.io</a>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <div class="eyebrow">Trust</div>
+        <h1>Cookies</h1>
+        <p class="lede">
+          This Cookie Statement explains how ConnectedCompany Ltd uses cookies when you visit our website at connectedcompany.io.
+        </p>
+      </section>
+
+      <section class="content">
+        <div class="meta">Last updated: May 2021</div>
+
+        <section class="policy-section">
+          <h2>What are cookies?</h2>
+          <div>
+            <p>
+              Cookies are small data files that are placed on your computer or mobile device when you visit a website. Cookies are widely used by website owners in order to make their websites work, or to work more efficiently, as well as to provide reporting information.
+            </p>
+            <p>
+              Cookies set by the website owner (in this case, ConnectedCompany) are called “first party cookies”. Cookies set by parties other than the website owner are called “third party cookies”. Third-party cookies enable third party features or functionality to be provided on or through the website (e.g. interactive content and analytics). The parties that set these third-party cookies may recognise your computer both when it visits the website in question and also when it visits certain other websites.
+            </p>
+          </div>
+        </section>
+
+        <section class="policy-section">
+          <h2>Why do we use cookies?</h2>
+          <div>
+            <p>
+              We and our third-party partners use first-party and third-party cookies for different reasons, including to see which areas and features are popular and to count visits to our Site. Some cookies are required for technical reasons in order for our Sites to operate, and we refer to these as “technical” cookies. Other cookies enable us to track and target the interests of our users to enhance the experience on our Site. Third parties serve cookies through our Sites for analytics, improving user experience, and other purposes.
+            </p>
+            <p>
+              The specific types of first and third-party cookies served through our Sites, the purposes they perform, and their duration may vary depending on the specific pages you visit.
+            </p>
+          </div>
+        </section>
+
+        <section class="policy-section">
+          <h2>Your choices regarding cookies</h2>
+          <div>
+            <p>
+              You can set the cookies we use in two ways. First, you can choose to deactivate the cookies at any time by using the Cookie Management Panel (coming soon), except for the technical cookies necessary for the operation of the Site as indicated above.
+            </p>
+            <p>
+              Second, most web browsers give you the ability to manage cookies (i.e. accept or reject) in your terminal. Please refer to your browser’s help for more information (e.g. Google Chrome, Mozilla Firefox, Safari, Edge).
+            </p>
+            <p>
+              Please note that removing the cookies from your computer and other devices may affect your subsequent visits to our Sites, by requiring that, for example, you restate your cookie preferences when you return to our Site.
+            </p>
+          </div>
+        </section>
+
+        <section class="policy-section">
+          <h2>Targeted advertising</h2>
+          <div>
+            <p>No, we do not use cookies with the purpose of targeted advertising.</p>
+          </div>
+        </section>
+
+        <section class="policy-section">
+          <h2>Updates</h2>
+          <div>
+            <p>
+              We may update this Statement from time to time in order to reflect, for example, changes to the cookies we use or for other operational, legal or regulatory reasons. Please therefore re-visit this Statement regularly to stay informed about our use of cookies and related technologies. The date at the top of this Statement indicates when it was last updated.
+            </p>
+          </div>
+        </section>
+
+        <section class="policy-section">
+          <h2>Further information</h2>
+          <div>
+            <p>If you have any questions about our use of cookies or other technologies, please email us at <a href="mailto:hello@connectedcompany.io">hello@connectedcompany.io</a>.</p>
+          </div>
+        </section>
+
+        <footer class="footer">
+          <div>ConnectedCompany Ltd</div>
+          <nav class="footer-links" aria-label="Legal">
+            <a href="/privacy">Privacy</a>
+            <a href="/cookies" aria-current="page">Cookie Policy</a>
+            <a href="/terms">Terms</a>
+            <a href="/modern-slavery">Modern Slavery</a>
+          </nav>
+        </footer>
+      </section>
+    </main>
+  </body>
+</html>

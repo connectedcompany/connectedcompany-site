@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" aria-hidden="true">
+  <g transform="rotate(-8 50 50)">
+    <path d="M50 8 L92 27.5 L92 72.5 L50 92 L8 72.5 L8 27.5 Z" fill="#0f0f0d"/>
+    <text x="50" y="58" text-anchor="middle" fill="#fff" font-family="Arial, sans-serif" font-weight="700" font-size="36">cc</text>
+  </g>
+</svg>

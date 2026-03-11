@@ -3,10 +3,11 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gridplane</title>
+    <title>ConnectedCompany</title>
     <link rel="icon" href="./favicon.ico" sizes="any" />
-    <link rel="icon" type="image/png" href="./assets/gridplane_logo.png" />
-    <link rel="apple-touch-icon" href="./assets/gridplane_logo.png" />
+    <link rel="icon" type="image/svg+xml" href="./assets/connectedcompany_logo.svg" />
+    <link rel="icon" type="image/png" href="./assets/connectedcompany_logo.png" sizes="any" />
+    <link rel="apple-touch-icon" href="./assets/connectedcompany_logo.svg" />
     <style>
       @font-face {
         font-family: "Montserrat";
@@ -265,6 +266,8 @@
         letter-spacing: 0.08em;
         text-transform: uppercase;
         white-space: nowrap;
+        font-family: inherit;
+        cursor: pointer;
       }
 
       .text-link {
@@ -459,6 +462,16 @@
         opacity: 0.86;
       }
 
+      .logo-card img.logo-mark--waitrose {
+        filter: grayscale(1) contrast(1.1) brightness(0.42);
+        opacity: 1;
+      }
+
+      .logo-card img.logo-mark--mediar {
+        filter: grayscale(1) contrast(1.16) brightness(0.48);
+        opacity: 1;
+      }
+
       .ecosystem-strip {
         display: grid;
         gap: 12px;
@@ -563,6 +576,52 @@
         font-size: 14px;
         line-height: 1.6;
         color: rgba(15, 15, 13, 0.8);
+      }
+
+      .cta-form-reveal {
+        grid-column: 1 / -1;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+      }
+
+      .cta-form-reveal.is-open {
+        max-height: 860px;
+      }
+
+      .cta-form-inner {
+        padding: 24px 0 8px;
+        border-top: 1px solid rgba(15, 15, 13, 0.08);
+        margin-top: 8px;
+      }
+
+      .cta-form-embed {
+        display: block;
+        width: 100%;
+        max-width: 640px;
+        height: 780px;
+        border: 1px solid var(--rule-soft);
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      .cta-form-close {
+        display: inline-block;
+        margin-bottom: 14px;
+        font-size: 10px;
+        line-height: 1.35;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+        background: none;
+        border: none;
+        padding: 0 0 4px;
+        border-bottom: 1px solid var(--rule-soft);
+        cursor: pointer;
+        font-family: inherit;
+      }
+
+      .cta-form-close:hover {
+        color: var(--ink);
       }
 
       .footer-note {
@@ -799,12 +858,12 @@
       <header class="topbar">
         <div class="nav-cluster">
           <div class="eyebrow">
-            <strong>Gridplane</strong>
+            <strong>ConnectedCompany</strong>
             <span>Build a better business</span>
           </div>
           <nav class="site-nav" aria-label="Primary">
             <a href="#examples">Our work</a>
-            <a href="#careers">Careers</a>
+            <a href="/careers">Careers</a>
             <a href="#contact">Contact</a>
           </nav>
         </div>
@@ -854,13 +913,13 @@
                 <img src="./assets/client-mg.svg" alt="M and G Asset Management logo" />
               </div>
               <div class="logo-card">
-                <img src="./assets/client-prudential.svg" alt="Prudential logo" />
+                <img class="logo-mark--waitrose" src="./assets/client-waitrose.svg" alt="Waitrose logo" />
               </div>
               <div class="logo-card">
                 <img src="./assets/client-edf.svg" alt="EDF logo" />
               </div>
               <div class="logo-card">
-                <img src="./assets/client-fca.svg" alt="Financial Conduct Authority logo" />
+                <img src="./assets/client-lloyds.svg" alt="Lloyds Bank logo" />
               </div>
             </div>
             <div class="logo-grid logo-grid--5 logo-slide" data-logo-slide aria-hidden="true">
@@ -868,16 +927,16 @@
                 <img src="./assets/client-abbvie.svg" alt="AbbVie logo" />
               </div>
               <div class="logo-card">
-                <img src="./assets/client-lloyds.svg" alt="Lloyds Bank logo" />
+                <img src="./assets/client-fca.svg" alt="Financial Conduct Authority logo" />
               </div>
               <div class="logo-card">
-                <img src="./assets/alcon.png" alt="Alcon logo" />
+                <img src="./assets/client-prudential.svg" alt="Prudential logo" />
               </div>
               <div class="logo-card">
                 <img src="./assets/client-allfunds.svg" alt="Allfunds logo" />
               </div>
               <div class="logo-card">
-                <img src="./assets/mediar.png" alt="Mediar logo" />
+                <img class="logo-mark--mediar" src="./assets/mediar.png" alt="Mediar logo" />
               </div>
             </div>
           </div>
@@ -955,37 +1014,31 @@
               <div class="micro-label">Front line operations</div>
               <h3>Meet teams where they are.</h3>
               <p>Working with front line operators who understand how the organisation really runs, then improving the structures, tools, and decisions that unlock better productivity and performance.</p>
-              <a class="content-link" href="#contact">Learn more</a>
             </article>
             <article class="section-panel content-card">
               <div class="micro-label">Existing estate</div>
               <h3>Maximise what is already there.</h3>
               <p>Protecting what makes an organisation distinctive, while isolating the wrinkles in the estate that reduce productivity, control, and performance.</p>
-              <a class="content-link" href="#contact">Learn more</a>
             </article>
             <article class="section-panel content-card">
               <div class="micro-label">Intervention design</div>
               <h3>Targeted change, not blanket transformation.</h3>
               <p>Identifying the interventions that remove friction, improve execution, and create measurable gains without replacing what already works.</p>
-              <a class="content-link" href="#contact">Learn more</a>
             </article>
             <article class="section-panel content-card">
               <div class="micro-label">Operating fabric</div>
               <h3>From fragmented estate to working system.</h3>
               <p>Mapping legacy tools, manual workarounds, integrations, and data dependencies into a clearer picture of how value really moves across the organisation.</p>
-              <a class="content-link" href="#contact">Learn more</a>
             </article>
             <article class="section-panel content-card">
               <div class="micro-label">Decision systems</div>
               <h3>Where value flow breaks down.</h3>
               <p>Identifying where decisions stall across fragmented processes and building clearer structures that improve speed, accountability, and execution.</p>
-              <a class="content-link" href="#contact">Learn more</a>
             </article>
             <article class="section-panel content-card">
               <div class="micro-label">Decision support</div>
               <h3>Better decisions in the flow of work.</h3>
               <p>Giving teams the information they need at the point of decision, so they can act with more speed, clarity, and consistency.</p>
-              <a class="content-link" href="#contact">Learn more</a>
             </article>
           </div>
         </section>
@@ -995,22 +1048,36 @@
             <div class="cta-copy">
               <div class="section-kicker">Speak with us</div>
               <h2>Start with a focused conversation.</h2>
-              <p>If you are considering change, or questioning whether what you have today can get you where you need to be, Gridplane would be glad to talk.</p>
-              <a class="button-link" href="https://gridplane.io">Schedule A Meeting</a>
+              <p>If you are considering change, or questioning whether what you have today can get you where you need to be, ConnectedCompany would be glad to talk.</p>
+              <button type="button" class="button-link" id="cta-reveal-btn" aria-expanded="false" aria-controls="cta-form-reveal">Get in touch</button>
             </div>
             <div class="cta-side">
               <div class="cta-visual">
                 <canvas id="cta-terrain" aria-hidden="true"></canvas>
               </div>
             </div>
+            <div class="cta-form-reveal" id="cta-form-reveal" role="region" aria-labelledby="cta-reveal-btn">
+              <div class="cta-form-inner">
+                <button type="button" class="cta-form-close" id="cta-form-close" aria-label="Close form">Close form</button>
+                <iframe
+                  class="cta-form-embed"
+                  src="about:blank"
+                  data-src="https://docs.google.com/forms/d/e/1FAIpQLSfz0GtY00yx6ZefPHwDcwOfpDfvbKy-kf_RH8Im8l2mAy0uXQ/viewform?embedded=true"
+                  width="100%"
+                  height="780"
+                  frameborder="0"
+                  marginheight="0"
+                  marginwidth="0"
+                  title="Get in touch – Google Form">Loading…</iframe>
+              </div>
+            </div>
           </div>
-          <div class="footer-note">Gridplane helps organisations make complex operating environments clearer, stronger, and more effective.</div>
+          <div class="footer-note">ConnectedCompany helps organisations make complex operating environments clearer, stronger, and more effective.</div>
         </section>
       </div>
 
       <footer class="site-footer">
         <div class="site-footer-inner">
-          <div class="site-footer-brand">Gridplane</div>
           <nav class="site-footer-links" aria-label="Legal">
             <a href="/privacy">Privacy</a>
             <a href="/cookies">Cookie Policy</a>
@@ -1547,8 +1614,33 @@
         }
       };
 
+      const bootCtaFormReveal = () => {
+        const btn = document.getElementById("cta-reveal-btn");
+        const closeBtn = document.getElementById("cta-form-close");
+        const reveal = document.getElementById("cta-form-reveal");
+        const iframe = reveal && reveal.querySelector(".cta-form-embed");
+        if (!btn || !reveal) return;
+
+        const open = () => {
+          reveal.classList.add("is-open");
+          btn.setAttribute("aria-expanded", "true");
+          if (iframe && iframe.getAttribute("data-src") && iframe.getAttribute("src") === "about:blank") {
+            iframe.setAttribute("src", iframe.getAttribute("data-src"));
+          }
+        };
+
+        const close = () => {
+          reveal.classList.remove("is-open");
+          btn.setAttribute("aria-expanded", "false");
+        };
+
+        btn.addEventListener("click", open);
+        if (closeBtn) closeBtn.addEventListener("click", close);
+      };
+
       if (document.readyState === "complete") {
         bootClientCarousel();
+        bootCtaFormReveal();
         if ("requestIdleCallback" in window) {
           window.requestIdleCallback(bootTerrainExperience, { timeout: 1200 });
         } else {
@@ -1557,6 +1649,7 @@
       } else {
         window.addEventListener("load", () => {
           bootClientCarousel();
+          bootCtaFormReveal();
           if ("requestIdleCallback" in window) {
             window.requestIdleCallback(bootTerrainExperience, { timeout: 1200 });
           } else {

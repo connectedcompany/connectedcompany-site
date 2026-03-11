@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Modern Slavery Statement | ConnectedCompany</title>
+    <link rel="icon" href="../favicon.ico" sizes="any" />
+    <link rel="icon" type="image/svg+xml" href="../assets/connectedcompany_logo.svg" />
+    <link rel="icon" type="image/png" href="../assets/connectedcompany_logo.png" sizes="any" />
+    <link rel="apple-touch-icon" href="../assets/connectedcompany_logo.svg" />
+    <style>
+      @font-face {
+        font-family: "Montserrat";
+        src:
+          url("../fonts/Montserrat-Regular.woff2") format("woff2"),
+          url("../fonts/Montserrat-Regular.ttf") format("truetype");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "Montserrat";
+        src:
+          url("../fonts/Montserrat-SemiBold.woff2") format("woff2"),
+          url("../fonts/Montserrat-SemiBold.ttf") format("truetype");
+        font-weight: 600;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "Montserrat";
+        src:
+          url("../fonts/Montserrat-Bold.woff2") format("woff2"),
+          url("../fonts/Montserrat-Bold.ttf") format("truetype");
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      :root {
+        color-scheme: light;
+        --bg: #efeee8;
+        --bg-strong: #e8e6de;
+        --panel: rgba(255, 255, 255, 0.4);
+        --panel-strong: rgba(255, 255, 255, 0.58);
+        --ink: #0f0f0d;
+        --muted: rgba(15, 15, 13, 0.62);
+        --rule: rgba(15, 15, 13, 0.18);
+        --rule-strong: rgba(15, 15, 13, 0.3);
+        --link: #0f0f0d;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+      }
+
+      body {
+        font-family: "Montserrat", Arial, sans-serif;
+        background:
+          radial-gradient(circle at top left, rgba(255, 255, 255, 0.75), transparent 36%),
+          linear-gradient(180deg, var(--bg) 0%, var(--bg-strong) 100%);
+        color: var(--ink);
+      }
+
+      a {
+        color: var(--link);
+      }
+
+      .site {
+        width: min(1120px, calc(100vw - 32px));
+        margin: 0 auto;
+        padding: 28px 0 56px;
+      }
+
+      .topbar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        padding: 8px 0 24px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+      }
+
+      .brand img {
+        width: 34px;
+        height: 34px;
+        object-fit: contain;
+      }
+
+      .top-links {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+
+      .top-links a,
+      .footer-links a {
+        text-decoration: none;
+        color: var(--muted);
+      }
+
+      .top-links a:hover,
+      .footer-links a:hover,
+      .brand:hover {
+        color: var(--ink);
+      }
+
+      .hero,
+      .content {
+        border: 1px solid var(--rule);
+        background: var(--panel);
+        backdrop-filter: blur(10px);
+      }
+
+      .hero {
+        padding: 48px;
+        border-radius: 28px 28px 0 0;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 16px;
+        color: var(--muted);
+        font-size: 0.82rem;
+        text-transform: uppercase;
+        letter-spacing: 0.16em;
+      }
+
+      h1 {
+        margin: 0;
+        font-size: clamp(2.4rem, 6vw, 4.8rem);
+        line-height: 0.96;
+        letter-spacing: -0.05em;
+        max-width: 14ch;
+      }
+
+      .lede {
+        max-width: 700px;
+        margin: 18px 0 0;
+        color: var(--muted);
+        font-size: 1.02rem;
+        line-height: 1.7;
+      }
+
+      .content {
+        border-top: 0;
+        border-radius: 0 0 28px 28px;
+        padding: 0 48px 32px;
+      }
+
+      .meta {
+        padding: 28px 0 20px;
+        border-bottom: 1px solid var(--rule);
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .policy-section {
+        padding: 28px 0;
+        border-bottom: 1px solid var(--rule);
+        display: grid;
+        grid-template-columns: minmax(180px, 220px) 1fr;
+        gap: 28px;
+      }
+
+      .policy-section:last-of-type {
+        border-bottom: 0;
+      }
+
+      .policy-section h2 {
+        margin: 0;
+        font-size: 0.92rem;
+        line-height: 1.4;
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+      }
+
+      .policy-section p {
+        margin: 0 0 14px;
+        color: var(--muted);
+        line-height: 1.8;
+      }
+
+      .policy-section p:last-child {
+        margin-bottom: 0;
+      }
+
+      .footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        padding: 26px 0 0;
+        color: var(--muted);
+        font-size: 0.94rem;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+
+      @media (max-width: 760px) {
+        .site {
+          width: min(100vw - 20px, 1120px);
+          padding-top: 18px;
+        }
+
+        .topbar,
+        .footer,
+        .policy-section {
+          grid-template-columns: 1fr;
+          display: grid;
+        }
+
+        .hero,
+        .content {
+          padding-left: 22px;
+          padding-right: 22px;
+        }
+
+        .hero {
+          padding-top: 34px;
+          padding-bottom: 34px;
+        }
+
+        .content {
+          padding-bottom: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="site">
+      <header class="topbar">
+        <a class="brand" href="/">
+          <img src="../assets/connectedcompany_logo.svg" alt="ConnectedCompany logo" />
+          <span>ConnectedCompany</span>
+        </a>
+        <nav class="top-links" aria-label="Secondary">
+          <a href="/">Home</a>
+          <a href="/privacy">Privacy</a>
+          <a href="/modern-slavery" aria-current="page">Modern Slavery</a>
+          <a href="mailto:hello@connectedcompany.io">hello@connectedcompany.io</a>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <div class="eyebrow">Responsibility</div>
+        <h1>Modern Slavery</h1>
+        <p class="lede">
+          Our statement on modern slavery and human trafficking in accordance with the UK Modern Slavery Act 2015.
+        </p>
+      </section>
+
+      <section class="content">
+        <div class="meta">Statement for the financial year</div>
+
+        <section class="policy-section">
+          <h2>Introduction</h2>
+          <div>
+            <p>
+              ConnectedCompany Ltd (“we”, “our”, “us”) is committed to acting ethically and with integrity in all our business dealings and relationships, and to implementing and enforcing effective systems and controls to ensure modern slavery and human trafficking do not take place anywhere in our own business or in our supply chains.
+            </p>
+            <p>
+              This statement is made pursuant to section 54 of the UK Modern Slavery Act 2015 and sets out the steps we have taken, and continue to take, to ensure that modern slavery and human trafficking are not taking place in our business or supply chains.
+            </p>
+          </div>
+        </section>
+
+        <section class="policy-section">
+          <h2>Our business</h2>
+          <div>
+            <p>
+              ConnectedCompany is a consultancy that helps organisations make sense of complex operating environments and improve performance. We operate with a small, professional team and a network of associates. Our supply chain is limited and consists mainly of professional services, technology and software, and routine business support (e.g. legal, accounting, office services).
+            </p>
+          </div>
+        </section>
+
+        <section class="policy-section">
+          <h2>Our policies</h2>
+          <div>
+            <p>
+              We expect the same high standards from our suppliers and partners. Our approach to procurement and supplier selection takes into account ethical and responsible business conduct. We do not knowingly engage with any supplier or partner that does not share our commitment to preventing modern slavery and human trafficking.
+            </p>
+            <p>
+              We encourage anyone with concerns about modern slavery or human trafficking in connection with our business or supply chain to report them. Concerns can be raised with us at <a href="mailto:hello@connectedcompany.io">hello@connectedcompany.io</a>.
+            </p>
+          </div>
+        </section>
+
+        <section class="policy-section">
+          <h2>Due diligence and risk</h2>
+          <div>
+            <p>
+              Given the nature and size of our business and supply chain, we assess our exposure to modern slavery and human trafficking as low. We do not operate in high-risk sectors or geographies typically associated with these issues. We continue to keep this under review and will take further steps if our operations or supply chain change in a way that increases risk.
+            </p>
+          </div>
+        </section>
+
+        <section class="policy-section">
+          <h2>Review</h2>
+          <div>
+            <p>
+              This statement will be reviewed and updated annually. It was approved by the leadership of ConnectedCompany Ltd and published on our website.
+            </p>
+          </div>
+        </section>
+
+        <footer class="footer">
+          <div>ConnectedCompany Ltd</div>
+          <nav class="footer-links" aria-label="Legal">
+            <a href="/privacy">Privacy</a>
+            <a href="/cookies">Cookie Policy</a>
+            <a href="/terms">Terms</a>
+            <a href="/modern-slavery" aria-current="page">Modern Slavery</a>
+          </nav>
+        </footer>
+      </section>
+    </main>
+  </body>
+</html>

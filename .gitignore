@@ -10,16 +10,16 @@
 # Exploration, prep, and brand working files
 /Archive/
 /BRAND.md
-/Gridplane Brand Guidelines.pdf
-/gridplane-hex-terrain-prototype.html
-/gridplane-key-visuals.html
-/gridplane-key-visuals.css
-/gridplane-focused-conversation.svg
-/gridplane-motif-01-structured-grid.svg
-/gridplane-motif-01-structured-grid-dark.svg
-/gridplane-motif-02-layered-planes.svg
-/gridplane-motif-02-layered-planes-dark.svg
-/gridplane-motif-03-mesh-network.svg
-/gridplane-motif-03-mesh-network-light.svg
+/ConnectedCompany Brand Guidelines.pdf
+/connectedcompany-hex-terrain-prototype.html
+/connectedcompany-key-visuals.html
+/connectedcompany-key-visuals.css
+/connectedcompany-focused-conversation.svg
+/connectedcompany-motif-01-structured-grid.svg
+/connectedcompany-motif-01-structured-grid-dark.svg
+/connectedcompany-motif-02-layered-planes.svg
+/connectedcompany-motif-02-layered-planes-dark.svg
+/connectedcompany-motif-03-mesh-network.svg
+/connectedcompany-motif-03-mesh-network-light.svg
 /three.module.min.js
 /.pydeps/

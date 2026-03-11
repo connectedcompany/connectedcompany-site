@@ -1,4 +1,4 @@
-# Gridplane
+# ConnectedCompany
 
 Static site prepared for GitHub Pages deployment.
 
@@ -10,4 +10,4 @@ Static site prepared for GitHub Pages deployment.
 - `CNAME`
 
 ## Domain
-Primary domain: `gridplane.io`
+Primary domain: `connectedcompany.io`

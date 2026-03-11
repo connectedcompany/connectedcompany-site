@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Careers | ConnectedCompany</title>
+    <link rel="icon" href="../favicon.ico" sizes="any" />
+    <link rel="icon" type="image/svg+xml" href="../assets/connectedcompany_logo.svg" />
+    <link rel="icon" type="image/png" href="../assets/connectedcompany_logo.png" sizes="any" />
+    <link rel="apple-touch-icon" href="../assets/connectedcompany_logo.svg" />
+    <style>
+      @font-face {
+        font-family: "Montserrat";
+        src:
+          url("../fonts/Montserrat-Regular.woff2") format("woff2"),
+          url("../fonts/Montserrat-Regular.ttf") format("truetype");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "Montserrat";
+        src:
+          url("../fonts/Montserrat-SemiBold.woff2") format("woff2"),
+          url("../fonts/Montserrat-SemiBold.ttf") format("truetype");
+        font-weight: 600;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "Montserrat";
+        src:
+          url("../fonts/Montserrat-Bold.woff2") format("woff2"),
+          url("../fonts/Montserrat-Bold.ttf") format("truetype");
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      :root {
+        color-scheme: light;
+        --bg: #efeee8;
+        --bg-strong: #e8e6de;
+        --panel: rgba(255, 255, 255, 0.28);
+        --panel-strong: rgba(255, 255, 255, 0.54);
+        --ink: #0f0f0d;
+        --muted: rgba(15, 15, 13, 0.58);
+        --rule: rgba(15, 15, 13, 0.34);
+        --rule-soft: rgba(15, 15, 13, 0.16);
+        --link: #0f0f0d;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        margin: 0;
+        min-height: 100%;
+      }
+
+      body {
+        font-family: "Montserrat", Arial, sans-serif;
+        background: var(--bg);
+        color: var(--ink);
+      }
+
+      a {
+        color: var(--link);
+      }
+
+      .site {
+        position: relative;
+        z-index: 1;
+        min-height: 100vh;
+        width: min(1240px, calc(100% - 36px));
+        margin: 0 auto;
+        padding: 0 0 56px;
+        background:
+          linear-gradient(180deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0) 16%),
+          linear-gradient(180deg, rgba(232, 230, 222, 0.26), rgba(232, 230, 222, 0.72) 55%, rgba(232, 230, 222, 0.94) 100%);
+      }
+
+      .topbar {
+        position: sticky;
+        top: 0;
+        z-index: 3;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        padding: 18px 18px 0;
+        background: linear-gradient(180deg, rgba(239, 238, 232, 0.9), rgba(239, 238, 232, 0.38) 72%, rgba(239, 238, 232, 0));
+        backdrop-filter: blur(6px);
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        text-decoration: none;
+        font-weight: 700;
+        letter-spacing: 0.02em;
+        color: var(--ink);
+      }
+
+      .brand img {
+        width: 34px;
+        height: 34px;
+        object-fit: contain;
+      }
+
+      .top-links {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+
+      .top-links a {
+        text-decoration: none;
+        color: var(--muted);
+        font-size: 10px;
+        line-height: 1.35;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .top-links a:hover,
+      .top-links a[aria-current="page"],
+      .brand:hover {
+        color: var(--ink);
+      }
+
+      .hero,
+      .content {
+        border: 1px solid var(--rule-soft);
+        background: var(--panel);
+        backdrop-filter: blur(8px);
+      }
+
+      .hero {
+        padding: 48px 24px 40px;
+        border-radius: 0;
+        margin: 24px 0 0;
+      }
+
+      .eyebrow {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 14px;
+        padding-bottom: 6px;
+        border-bottom: 1px solid var(--rule);
+        color: var(--muted);
+        font-size: 10px;
+        line-height: 1.35;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .hero h1 {
+        margin: 0;
+        font-size: clamp(42px, 9vw, 96px);
+        line-height: 0.9;
+        letter-spacing: -0.07em;
+        max-width: 12ch;
+      }
+
+      .lede {
+        max-width: 40ch;
+        margin: 18px 0 0;
+        font-size: clamp(18px, 2vw, 24px);
+        line-height: 1.35;
+        color: rgba(15, 15, 13, 0.84);
+      }
+
+      .content {
+        border-top: 0;
+        border-radius: 0;
+        padding: 0 24px 32px;
+        margin: 0 0 0 0;
+      }
+
+      .careers-copy {
+        padding: 28px 0 32px;
+        border-bottom: 1px solid rgba(15, 15, 13, 0.08);
+      }
+
+      .careers-copy p {
+        margin: 0 0 18px;
+        font-size: 14px;
+        line-height: 1.6;
+        color: rgba(15, 15, 13, 0.78);
+        max-width: 65ch;
+      }
+
+      .careers-copy p:last-child {
+        margin-bottom: 0;
+      }
+
+      .form-section {
+        padding: 32px 0 28px;
+      }
+
+      .form-section .section-kicker {
+        margin: 0 0 18px;
+        color: var(--muted);
+        font-size: 10px;
+        line-height: 1.35;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .careers-form-embed {
+        display: block;
+        max-width: 640px;
+        border: 1px solid var(--rule-soft);
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      .form-fallback {
+        margin: 14px 0 0;
+        font-size: 14px;
+        line-height: 1.6;
+        color: var(--muted);
+      }
+
+      .form-fallback a {
+        color: var(--ink);
+        text-decoration: underline;
+        text-underline-offset: 2px;
+      }
+
+      .form-fallback a:hover {
+        text-decoration: none;
+      }
+
+      .footer {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        gap: 20px;
+        padding: 24px 0 0;
+        border-top: 1px solid rgba(15, 15, 13, 0.12);
+        color: var(--muted);
+        font-size: 11px;
+        line-height: 1.5;
+      }
+
+      .footer-links {
+        display: flex;
+        gap: 18px;
+        flex-wrap: wrap;
+      }
+
+      .footer-links a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      .footer-links a:hover {
+        color: var(--ink);
+      }
+
+      @media (max-width: 760px) {
+        .site {
+          width: min(1240px, calc(100% - 28px));
+          padding-top: 0;
+        }
+
+        .topbar {
+          padding: 14px 14px 0;
+        }
+
+        .hero,
+        .content {
+          padding-left: 18px;
+          padding-right: 18px;
+        }
+
+        .hero {
+          padding-top: 34px;
+          padding-bottom: 34px;
+          margin-top: 18px;
+        }
+
+        .content {
+          padding-bottom: 24px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="site">
+      <header class="topbar">
+        <a class="brand" href="/">
+          <img src="../assets/connectedcompany_logo.svg" alt="ConnectedCompany logo" />
+          <span>ConnectedCompany</span>
+        </a>
+        <nav class="top-links" aria-label="Secondary">
+          <a href="/">Home</a>
+          <a href="/#examples">Our work</a>
+          <a href="/#contact">Contact</a>
+          <a href="/careers" aria-current="page">Careers</a>
+          <a href="mailto:hello@connectedcompany.io">hello@connectedcompany.io</a>
+        </nav>
+      </header>
+
+      <section class="hero">
+        <div class="eyebrow">Join us</div>
+        <h1>Careers</h1>
+        <p class="lede">
+          Be part of our global network.
+        </p>
+      </section>
+
+      <section class="content">
+        <div class="careers-copy">
+          <p>
+            Launched in 2021, ConnectedCompany is unlike traditional consultancies. We bring together experienced practitioners within a flat structure and give them the autonomy to do the right thing for our customers. We are made up of contractors and permanent staff whose expertise and experience are our big advantage.
+          </p>
+          <p>
+            Becoming part of the network isn’t easy. We have high standards and a rigorous interview process. Once you join, you’re part of the network for as long as you want – and we’ll do everything we can to keep you.
+          </p>
+          <p>
+            We’ve all been there, done that and learnt how to do things so much better.
+          </p>
+          <p>
+            There’s more to joining than just finding a great role. You’ll be part of an ecosystem that values your skills and experience, fosters your development and strengthens your career.
+          </p>
+        </div>
+
+        <div class="form-section">
+          <div class="section-kicker">Get in touch</div>
+          <iframe
+            class="careers-form-embed"
+            src="https://docs.google.com/forms/d/e/1FAIpQLSfz0GtY00yx6ZefPHwDcwOfpDfvbKy-kf_RH8Im8l2mAy0uXQ/viewform?embedded=true"
+            width="100%"
+            height="780"
+            frameborder="0"
+            marginheight="0"
+            marginwidth="0"
+            title="Get in touch – Google Form">Loading…</iframe>
+          <p class="form-fallback">Alternatively <a href="https://forms.gle/r86vX2y5cboCiwZy5" target="_blank" rel="noopener">open the form in a new tab</a>.</p>
+        </div>
+
+        <footer class="footer">
+          <div>ConnectedCompany Ltd</div>
+          <nav class="footer-links" aria-label="Legal">
+            <a href="/privacy">Privacy</a>
+            <a href="/cookies">Cookie Policy</a>
+            <a href="/terms">Terms</a>
+            <a href="/modern-slavery">Modern Slavery</a>
+          </nav>
+        </footer>
+      </section>
+    </main>
+  </body>
+</html>
