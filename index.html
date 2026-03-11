@@ -1401,7 +1401,7 @@
               float lightWorkflowFill = lightWorkflowReveal * hexInterior * max(fillRoll * 0.86, settledReveal * 0.68);
               float hotFill = hotCell * hexInterior * fillRoll * clamp(settledReveal * 1.08 + scanCore * 0.18 * fadeMute + 0.08, 0.0, 1.0);
               float filledCellPresence = clamp(max(max(workflowFill, lightWorkflowFill), hotFill), 0.0, 1.0);
-              float emptyBorderShade = mix(0.2, 1.0, filledCellPresence);
+              float emptyBorderShade = 1.0;
 
               vec3 prePulseTint = mix(base * 0.94, uLineColor, 0.56);
               vec3 scanTint = mix(base * 0.88, uLineColor, 0.78);
